@@ -1,33 +1,50 @@
-name: Update URLs
+name: Run Python Script
 
 on:
   schedule:
-    - cron: '* * * * *'  # Run every minute
+    - cron: '* * * * *' # At 00:00 on Monday
 
 jobs:
-  update-urls:
+  build:
     runs-on: ubuntu-latest
-
     steps:
+    
       - name: Checkout repository
         uses: actions/checkout@v2
+        # Check out the repository content to GitHub runner
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.9'
+          # Install the Python version needed
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # Upgrade pip and install dependencies from requirements.txt
 
-      - name: Run Python script to update URLs
-        run: python your_script.py
+      - name: Run Python script and log errors
+        run: |
+          python main.py > output.log 2>&1
+          if grep -q "Error" output.log; then
+            echo "Errors found in script execution. Check the log for details."
+            exit 1
+          fi
+        # Run the Python script and redirect output to a log file
 
       - name: Commit changes
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add urls.json
-          git commit -m "Updated URLs"
-          git push
-        continue-on-error: true  # Prevents failure if no changes are made
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "Updated logs" --allow-empty)
+          # Commit changes if there are any
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          # Push changes to the specified branch
