@@ -1,14 +1,15 @@
-name: Run Python Script
+name: Update URLs
 
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '* * * * *'  # Run every minute
 
 jobs:
-  run-script:
+  update-urls:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Python
@@ -16,6 +17,17 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Run Python script
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run Python script to update URLs
+        run: python update_urls.py
+
+      - name: Commit changes
         run: |
-          python your_script.py
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add urls.json
+          git commit -m "Updated URLs"
+          git push
+        continue-on-error: true  # Prevents failure if no changes are made
