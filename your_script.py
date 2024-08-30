@@ -18,16 +18,16 @@ def get_page_text(url):
         
         # Check for words ending with "BR" and append them to the base URL
         words = page_text.split()
-        new_urls = []
+        new_urls = {}
         for word in words:
             if word.endswith("BR"):
                 full_url = base_url + word
-                new_urls.append(full_url)
+                new_urls[word] = full_url
         
         return new_urls
     else:
         print(f"Failed to retrieve page. Status code: {response.status_code}")
-        return []
+        return {}
 
 def update_urls(new_urls):
     # Path to the JSON file
@@ -38,19 +38,19 @@ def update_urls(new_urls):
         with open(json_file, "r") as file:
             data = json.load(file)
     else:
-        data = {"urls": []}
+        data = {}
 
     # Flag to track if new URLs were added
     new_entries_added = False
 
     # Check each new URL and add if it doesn't exist
-    for url in new_urls:
-        if url not in data["urls"]:
-            data["urls"].append(url)
+    for key, url in new_urls.items():
+        if key not in data:
+            data[key] = url
             print(f"Added new URL: {url}")
             new_entries_added = True
         else:
-            print(f"URL already exists: {url}")
+            print(f"URL already exists for key: {key}")
 
     # Save updated data back to the JSON file if new entries were added
     if new_entries_added:
@@ -65,4 +65,3 @@ if __name__ == "__main__":
     new_urls = get_page_text(url)
     if new_urls:
         update_urls(new_urls)
-
