@@ -10,6 +10,27 @@ from email.mime.text import MIMEText
 logging.basicConfig(filename='error.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+def get_job_title(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise HTTPError for bad responses
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Request failed: {e}")
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # Assuming the job title is within an <h1> or <title> tag
+    title_tag = soup.find('h1') or soup.find('title')
+    if title_tag:
+        return title_tag.get_text(strip=True)
+    else:
+        logging.error(f"Failed to find job title on page: {url}")
+        return None
+
 def get_page_text(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -73,9 +94,17 @@ def send_email(new_urls):
     receiver_email = "mphanidhar89@gmail.com"
     password = "uoen gjyk fwkt fkqa"
 
-    subject = "New URLs Found"
-    # Add extra new lines between URLs for better readability
-    body = "\n\n".join(new_urls.values())
+    body = ""
+    subject_lines = []
+
+    for key, url in new_urls.items():
+        job_title = get_job_title(url)
+        if job_title:
+            subject_lines.append(f"Job Title: {job_title}")
+            body += f"Job Title: {job_title}\nURL: {url}\n\n"
+
+    subject = "New Job Listings Found\n" + "\n".join(subject_lines)
+
     msg = MIMEText(body)
     msg['Subject'] = subject
     msg['From'] = sender_email
