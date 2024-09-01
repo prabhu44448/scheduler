@@ -70,7 +70,7 @@ def update_urls(new_urls):
 
 def send_email(new_urls):
     sender_email = "prabhukiran.chintha@gmail.com"
-    receiver_email = "Mphanidhar89@gmail.com"
+    receiver_email = "mphanidhar89@gmail.com"
     password = "uoen gjyk fwkt fkqa"
 
     subject = "New URLs Found"
