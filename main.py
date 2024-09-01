@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import json
 import os
 import logging
+import smtplib
+from email.mime.text import MIMEText
 
 # Configure logging
 logging.basicConfig(filename='error.log', level=logging.ERROR,
@@ -60,10 +62,33 @@ def update_urls(new_urls):
             with open(json_file, "w") as file:
                 json.dump(data, file, indent=4)
             print("Updated urls.json with new entries.")
+            send_email(new_urls)
         except Exception as e:
             logging.error(f"Failed to write JSON file: {e}")
     else:
         print("No new URLs added.")
+
+def send_email(new_urls):
+    sender_email = "prabhukiran.chintha@gmail.com"
+    receiver_email = "Mphanidhar89@gmail.com"
+    password = "uoen gjyk fwkt fkqa"
+
+    subject = "New URLs Found"
+    body = "\n".join(new_urls.values())
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+
+    try:
+      
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, msg.as_string())
+        print("Email sent successfully.")
+    except Exception as e:
+        logging.error(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
     url = 'https://digitalcareers.infosys.com/infosys/global-careers?location=USA'
