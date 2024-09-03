@@ -5,6 +5,7 @@ import os
 import logging
 import smtplib
 from email.mime.text import MIMEText
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(filename='error.log', level=logging.ERROR,
@@ -103,7 +104,7 @@ def send_email(new_urls):
             subject_lines.append(f"Job Title: {job_title}")
             body += f"Job Title: {job_title}\nURL: {url}\n\n"
 
-    subject = "New Job Listings Found\n" + "\n".join(subject_lines)
+    subject = "New Job Listings Found"+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"\n" + "\n".join(subject_lines)
 
     msg = MIMEText(body)
     msg['Subject'] = subject
