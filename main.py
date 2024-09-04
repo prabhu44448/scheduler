@@ -104,7 +104,7 @@ def send_email(new_urls):
             subject_lines.append(f"Job Title: {job_title}")
             body += f"Job Title: {job_title}\nURL: {url}\n\n"
 
-    subject = "New Job Listings Found"+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"\n" + "\n".join(subject_lines)
+    subject = "New Job Listings Found"+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"\n"
 
     msg = MIMEText(body)
     msg['Subject'] = subject
