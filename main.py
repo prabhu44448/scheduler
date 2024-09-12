@@ -71,9 +71,11 @@ def update_urls(new_urls):
 
     new_entries_added = False
 
+    added_urls = {}
     for key, url in new_urls.items():
         if key not in data:
             data[key] = url
+            added_urls[key] = url
             print(f"Added new URL: {url}")
             new_entries_added = True
         else:
@@ -84,7 +86,7 @@ def update_urls(new_urls):
             with open(json_file, "w") as file:
                 json.dump(data, file, indent=4)
             print("Updated urls.json with new entries.")
-            send_email(new_urls)
+            send_email(added_urls)
         except Exception as e:
             logging.error(f"Failed to write JSON file: {e}")
     else:
