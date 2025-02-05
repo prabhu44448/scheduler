@@ -17,3 +17,4 @@
 2024-10-21 03:07:38,650 - ERROR - Request failed: 404 Client Error: Not Found for url: https://www.infosys.com/404/
 2024-10-21 03:07:39,248 - ERROR - Request failed: 404 Client Error: Not Found for url: https://www.infosys.com/404/
 2024-10-21 03:07:39,799 - ERROR - Request failed: 404 Client Error: Not Found for url: https://www.infosys.com/404/
+2025-02-05 17:13:11,471 - ERROR - Request failed: 504 Server Error: Gateway Time-out for url: https://digitalcareers.infosys.com/infosys/global-careers?location=USA
