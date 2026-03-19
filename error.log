@@ -19,3 +19,4 @@
 2024-10-21 03:07:39,799 - ERROR - Request failed: 404 Client Error: Not Found for url: https://www.infosys.com/404/
 2025-02-05 17:13:11,471 - ERROR - Request failed: 504 Server Error: Gateway Time-out for url: https://digitalcareers.infosys.com/infosys/global-careers?location=USA
 2026-03-19 13:58:54,388 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-89c6b8fc1cdsm47157276d6.14 - gsmtp')
+2026-03-19 15:51:10,647 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-89c6b9ce6cfsm55743626d6.24 - gsmtp')
