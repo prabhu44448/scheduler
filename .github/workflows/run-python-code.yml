@@ -11,11 +11,11 @@ jobs:
     steps:
     
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         # Check out the repository content to GitHub runner
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           # Install the Python version needed
@@ -44,7 +44,7 @@ jobs:
           # Commit changes if there are any
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
