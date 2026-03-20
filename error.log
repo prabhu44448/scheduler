@@ -31,3 +31,4 @@
 2026-03-20 16:54:48,846 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials af79cd13be357-8cfc8fbe4edsm196762385a.20 - gsmtp')
 2026-03-20 19:07:09,845 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5a478bee46e88-2c10b29d28csm5260894eec.19 - gsmtp')
 2026-03-20 20:27:47,209 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5a478bee46e88-2c10b2d01f7sm4626015eec.23 - gsmtp')
+2026-03-20 21:46:44,076 - ERROR - Email failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-89c8537f842sm32282936d6.48 - gsmtp')
