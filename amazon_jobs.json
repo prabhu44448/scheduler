@@ -142,5 +142,17 @@
         "location": "US, CA, San Francisco",
         "posting_date": null,
         "url": "https://www.amazon.jobs/en/jobs/5bae2239-9578-48e5-a488-d6e7cf6527fb"
+    },
+    "9e7d5e74-51cf-433a-9b99-6dc26494e32a": {
+        "title": "Software Development Manager, Amazon Leo Data Platform",
+        "location": "US, WA, Redmond",
+        "posting_date": null,
+        "url": "https://www.amazon.jobs/en/jobs/9e7d5e74-51cf-433a-9b99-6dc26494e32a"
+    },
+    "1ee7b49f-7255-4996-8544-47834ecf2b9f": {
+        "title": "Software Development Engineer II, Items and Relationships Platform",
+        "location": "US, WA, Seattle",
+        "posting_date": null,
+        "url": "https://www.amazon.jobs/en/jobs/1ee7b49f-7255-4996-8544-47834ecf2b9f"
     }
 }
